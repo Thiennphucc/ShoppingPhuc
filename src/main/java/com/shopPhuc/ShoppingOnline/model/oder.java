@@ -20,7 +20,7 @@ public class oder implements Serializable {
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne //
     @JoinColumn(name = "User_ID")
     private User user;
 
