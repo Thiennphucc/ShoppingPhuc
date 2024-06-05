@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns:layout=""
+layout:decorate="~{client/clientLayout}" xmlns:sec>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>handtime</title>
+</head>
+<body>
+    <section layout:fragment="content">
+        <div th:replace="~{client/categories :: categories}"></div>
+        <div th:replace="~{client/topSale :: topSale}"></div>
+        <div th:replace="~{client/product :: product}"></div>
+        
+    </section>
+  
+</body>
+</html>
