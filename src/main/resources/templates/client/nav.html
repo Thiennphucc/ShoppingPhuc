@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="hero_area"  th:fragment="nav">
+    <div class="hero_area" th:fragment="nav">
         <!-- header section strats -->
         <header class="header_section">
           <div class="container-fluid">
@@ -45,8 +45,11 @@
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item m-0" th:href="@{/login}">Đăng nhập</a>
-                        <a class="dropdown-item m-0" th:href="@{/register}">Đăng ký</a>
+                        <a class="dropdown-item m-0" th:href="@{/login}" th:unless="${session.user}">Đăng nhập</a>
+                        <a class="dropdown-item m-0" th:href="@{/register}" th:unless="${session.user}">Đăng ký</a>
+                      <a class="dropdown-item m-0" th:href="@{/logout}" th:if="${session.user}">Đăng xuất</a>
+                      <a class="dropdown-item m-0" th:href="@{/account}" th:if="${session.user}">Thông tin cá nhân</a>
+
                     </div>
                   <a href="">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>

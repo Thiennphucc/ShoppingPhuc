@@ -24,7 +24,7 @@ public class User implements Serializable {
     private String email;
     @Column(nullable=false)
     private Boolean gender;
-    private String phone;
+    private Integer phone;
     private String address;
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<oder> orders;

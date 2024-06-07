@@ -117,33 +117,32 @@
 
                         <div class="card bg-glass">
                             <div class="card-body px-4 py-5 px-md-5">
-                                <form>
+                                <form th:action="@{/register}" method="post" th:object="${user}">
                                     <!-- 2 column grid layout with text inputs for the first and last names -->
                                     <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <div data-mdb-input-init class="form-outline">
-                                                <input type="text" id="form3Example1" class="form-control" />
-                                                <label class="form-label" for="form3Example1">First name</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-4">
-                                            <div data-mdb-input-init class="form-outline">
-                                                <input type="text" id="form3Example2" class="form-control" />
-                                                <label class="form-label" for="form3Example2">Last name</label>
+                                                <input type="text" id="form3Example1" th:field="*{username}" class="form-control" />
+                                                <label class="form-label" for="form3Example1">UserName</label>
+                                                <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Email input -->
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" id="form3Example3" class="form-control" />
+                                        <input type="email" id="form3Example3" th:field="*{email}" class="form-control" />
                                         <label class="form-label" for="form3Example3">Email address</label>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
                                     </div>
 
                                     <!-- Password input -->
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" id="form3Example4" class="form-control" />
+                                        <input type="password" id="form3Example4" th:field="*{password}" class="form-control" />
                                         <label class="form-label" for="form3Example4">Password</label>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
                                     </div>
 
                                     <!-- Checkbox -->
