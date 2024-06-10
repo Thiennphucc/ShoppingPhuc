@@ -8,11 +8,13 @@ layout:decorate="~{client/clientLayout}" xmlns:sec>
 </head>
 <body>
     <section layout:fragment="content">
+        <div th:replace="~{client/sliderSession :: slider_section}"></div>
         <div th:replace="~{client/categories :: categories}"></div>
         <div th:replace="~{client/topSale :: topSale}"></div>
         <div th:replace="~{client/product :: product}"></div>
-        
+
     </section>
+
   
 </body>
 </html>

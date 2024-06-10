@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="hero_area" th:fragment="nav">
+    <div  th:fragment="nav">
         <!-- header section strats -->
         <header class="header_section">
           <div class="container-fluid">
@@ -22,21 +22,24 @@
               </button>
     
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav  ">
-                  <li class="nav-item active">
+                <ul class="navbar-nav text-dark ">
+                  <li th:class="nav-item" th:classappend="${active eq 'index'} ? 'active' : ''">
                     <a class="nav-link" th:href="@{/home}">index</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" th:href="@{/about}">About</a>
+
+                  <li th:class="nav-item" th:classappend="${active eq 'about'} ? 'active' : ''">
+                    <a class="nav-link" th:href="@{/about}">about</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" th:href="@{/product2}">Products</a>
+
+
+                  <li th:class="nav-item" th:classappend="${active eq 'product'} ? 'active' : ''">
+                    <a class="nav-link" th:href="@{/product}">product</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" th:href="@{/testimonial}">Testimonial</a>
+                  <li th:class="nav-item" th:classappend="${active eq 'testimonial'} ? 'active' : ''">
+                    <a class="nav-link" th:href="@{/testimonial}">testimonial</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" th:href="@{/contact}">Contact Us</a>
+                  <li th:class="nav-item" th:classappend="${active eq 'contact'} ? 'active' : ''">
+                    <a class="nav-link" th:href="@{/contact}">ContactUs</a>
                   </li>
                 </ul>
                 <div class="user_optio_box">
@@ -56,147 +59,12 @@
                   </a>
                 </div>
               </div>
+              </div>
             </nav>
           </div>
         </header>
         <!-- end header section -->
-        <!-- slider section -->
-        <section class="slider_section ">
-          <div class="slider_bg_box">
-            <img th:src="@{/images/slider-bg.jpg}" alt="Slider Background">
-        </div>
-          <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="container ">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <div class="detail-box">
-                        <h1>
-                          Stylish Watches
-                        </h1>
-                        <p>
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
-                        </p>
-                        <div class="btn-box">
-                          <a href="" class="btn1">
-                            Đăng Nhập
-                          </a>
-                          <a href="" class="btn2">
-                            Đăng Kí
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container ">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <div class="detail-box">
-                        <h1>
-                          Stylish Watches
-                        </h1>
-                        <p>
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
-                        </p>
-                        <div class="btn-box">
-                          <a href="" class="btn1">
-                            Đăng Nhập
-                          </a>
-                          <a href="" class="btn2">
-                            Đăng kí
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container ">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <div class="detail-box">
-                        <h1>
-                          Stylish Watches
-                        </h1>
-                        <p>
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
-                        </p>
-                        <div class="btn-box">
-                          <a href="" class="btn1">
-                            Đăng Nhập
-                          </a>
-                          <a href="" class="btn2">
-                            Đăng kí
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container ">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <div class="detail-box">
-                        <h1>
-                          Stylish Watches
-                        </h1>
-                        <p>
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
-                        </p>
-                        <div class="btn-box">
-                          <a href="" class="btn1">
-                            Đăng Nhập
-                          </a>
-                          <a href="" class="btn2">
-                            Đăng kí
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container ">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <div class="detail-box">
-                        <h1>
-                          Stylish Watches
-                        </h1>
-                        <p>
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
-                        </p>
-                        <div class="btn-box">
-                          <a href="" class="btn1">
-                            Đăng Nhập
-                          </a>
-                          <a href="" class="btn2">
-                            Đăng kí
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <ol class="carousel-indicators">
-              <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-              <li data-target="#customCarousel1" data-slide-to="1"></li>
-              <li data-target="#customCarousel1" data-slide-to="2"></li>
-              <li data-target="#customCarousel1" data-slide-to="3"></li>
-              <li data-target="#customCarousel1" data-slide-to="4"></li>
-            </ol>
-          </div>
-        </section>
+
          <!-- end slider section -->
       </div>
       
