@@ -72,18 +72,19 @@
       </div>
       <div class="col-lg-8">
         <div class="card">
-          <form class="card-body" th:object="${user}">
+          <form class="card-body" th:object="${user}" method="post" th:action="@{/account}">
             <div class="row mb-3">
               <div class="col-sm-3">
                 <h6 class="mb-0">Full Name</h6>
               </div>
+
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" th:field="*{username}">
+                <input type="text" class="form-control" th:field="*{username}" th:action="@{/account}">
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-sm-3">
-                <h6 class="mb-0">Email</h6>
+                <h6 class="mb-0">Password</h6>
               </div>
               <div class="col-sm-9 text-secondary">
                 <input type="text" class="form-control" th:field="*{password}" value="${user.password}">
@@ -91,12 +92,30 @@
             </div>
             <div class="row mb-3">
               <div class="col-sm-3">
-                <h6 class="mb-0">Phone</h6>
+                <h6 class="mb-0">Email</h6>
               </div>
               <div class="col-sm-9 text-secondary">
                 <input type="text" class="form-control" th:field="*{email}" value="${user.email}">
               </div>
             </div>
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Đia chỉ</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" th:field="*{address}" value="${user.address}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <input type="text" class="form-control" th:field="*{phone}" value="${user.phone}">
+              </div>
+            </div>
+
+
 
             <div class="row">
               <div class="col-sm-3"></div>
