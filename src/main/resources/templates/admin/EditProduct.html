@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns:layout="" layout:decorate="~{client/clientLayout}" xmlns:sec>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body layout:fragment="content">
+<form th:object="${product}" th:action="@{/admin/ManagerProduct/edit}" method="post">
+  <input type="hidden" th:field="*{id}">
+
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input type="text" class="form-control" th:field="*{title}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Price</label>
+    <input type="number" class="form-control" th:field="*{price}">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <select class="form-select" th:name="categoryid">
+      <option th:each="category : ${categories}"
+              th:value="${category.id}"
+              th:text="${category.categoryName}">
+      </option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</body>
+</html>

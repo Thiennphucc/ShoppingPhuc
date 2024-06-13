@@ -26,6 +26,8 @@ public class User implements Serializable {
     private Boolean gender;
     private Integer phone;
     private String address;
+    Boolean admin;
+
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<oder> orders;
 }

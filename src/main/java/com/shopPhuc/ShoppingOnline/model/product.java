@@ -8,6 +8,8 @@ import org.hibernate.annotations.Cascade;
 
 
 import java.io.Serializable;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,8 +25,13 @@ public class product implements Serializable {
     private int price;
     private String image;
     private Boolean active=true;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "Createdate")
+    Date createDate = new Date();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID")
     private category category;
+
+
 }
