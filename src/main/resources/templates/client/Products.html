@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns:layout=""
-      layout:decorate="~{client/clientLayout}" xmlns:sec>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org" xmlns:layout="" layout:decorate="~{client/clientLayout}" xmlns:sec>
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,13 +10,16 @@
      <div class="row">
           <div class="col-3 ">
               <div class="input-group justify-content-center">
-                  <div class="form-outline" data-mdb-input-init>
-                      <input type="search" id="form1" class="form-control" />
-                  </div>
-                  <button type="button" class="btn btn-primary ml-2" data-mdb-ripple-init>
-                     Search
-                  </button>
+                  <form th:action="@{/product}" method="get" class="form-inline">
+                      <div class="form-outline">
+                          <input type="search" th:name="keywords" id="keywords" th:value="${kw}" class="form-control" placeholder="Enter keywords">
+                      </div>
+                      <button type="submit" class="btn btn-primary ml-2">
+                          Filter
+                      </button>
+                  </form>
               </div>
+
 
           </div>
 
@@ -34,20 +37,35 @@
                              <p class="card-text" th:text="${item.price}">
                                  $19.99
                              </p>
-                             <button class="btn btn-primary">Add To Card</button>
+                             <form th:action="@{/cart/add/{id}(id=${item.id})}" method="get">
+                                 <input type="hidden" name="id" th:value="${item.id}"/>
+                                 <button type="submit" class="btn btn-primary">Add To Cart</button>
+                             </form>
                          </div>
                      </div>
                  </div>
              </div>
-             <nav aria-label="Page navigation example ">
-                 <ul class="pagination justify-content-center">
-                     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                     <li class="page-item"><a class="page-link" href="#">1</a></li>
-                     <li class="page-item"><a class="page-link" href="#">2</a></li>
-                     <li class="page-item"><a class="page-link" href="#">3</a></li>
-                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
+             <!-- Thymeleaf template for pagination -->
+             <div th:if="${page.totalPages > 1}">
+                 <ul class="pagination">
+                     <li th:class="${page.number == 0} ? 'page-item disabled' : 'page-item'">
+                         <a class="page-link" th:href="@{'/product?keywords=' + ${keywords} + '&amp;p=0'}">First</a>
+                     </li>
+                     <li th:class="${page.number == 0} ? 'page-item disabled' : 'page-item'">
+                         <a class="page-link" th:href="@{'/product?keywords=' + ${keywords} + '&amp;p=' + ${page.number - 1}}">Previous</a>
+                     </li>
+                     <li th:each="pageNum : ${#numbers.sequence(0, page.totalPages - 1)}" th:class="${page.number == pageNum} ? 'page-item active' : 'page-item'">
+                         <a class="page-link" th:href="@{'/product?keywords=' + ${keywords} + '&amp;p=' + ${pageNum}} " th:text="${pageNum + 1}"></a>
+                     </li>
+                     <li th:class="${page.number == page.totalPages - 1} ? 'page-item disabled' : 'page-item'">
+                         <a class="page-link" th:href="@{'/product?keywords=' + ${keywords} + '&amp;p=' + ${page.number + 1}}">Next</a>
+                     </li>
+                     <li th:class="${page.number == page.totalPages - 1} ? 'page-item disabled' : 'page-item'">
+                         <a class="page-link" th:href="@{'/product?keywords=' + ${keywords} + '&amp;p=' + ${page.totalPages - 1}}">Last</a>
+                     </li>
                  </ul>
-             </nav>
+             </div>
+
 
          </div>
      </div>

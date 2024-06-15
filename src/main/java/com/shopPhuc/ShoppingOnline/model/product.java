@@ -32,6 +32,8 @@ public class product implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID")
     private category category;
+    @Transient
+    private Integer qty;
 
 
 }

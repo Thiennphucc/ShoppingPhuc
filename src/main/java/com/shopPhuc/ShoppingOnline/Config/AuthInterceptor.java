@@ -23,10 +23,10 @@ public class AuthInterceptor implements HandlerInterceptor {
             if (uri.startsWith("/account") || uri.startsWith("/admin")) {
                 error = "Please login!";
             }
+
         } else if (!user.getAdmin() && uri.startsWith("/admin")) {
             error = "Access denied!";
         }
-
         if (error.length() > 0) { // If there's an error
             session.set("security-uri", uri);
 

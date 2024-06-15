@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -25,7 +26,7 @@ public class register {
         return "client/register";
     }
     @PostMapping("/register")
-    public String Register(@Valid @ModelAttribute("user") dtoRegister user, BindingResult Result) {
+    public String Register(@Valid @ModelAttribute("user") dtoRegister user, BindingResult Result, RedirectAttributes redirectAttributes ) {
         if(Result.hasErrors()){
             return "client/register";
         }
@@ -33,10 +34,11 @@ public class register {
         u.setUsername(user.getUsername());
         u.setPassword(user.getPassword());
         u.setEmail(user.getEmail());
+        u.setAdmin(false);
 
         userRepository.save(u);
-
-        return "client/register";
+        redirectAttributes.addFlashAttribute("success", "Đăng Kí THÀNH CÔNG ");
+        return "redirect:/login";
     }
     
 }
