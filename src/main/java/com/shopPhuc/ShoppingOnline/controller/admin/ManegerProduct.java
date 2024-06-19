@@ -5,6 +5,8 @@ import com.shopPhuc.ShoppingOnline.model.category;
 import com.shopPhuc.ShoppingOnline.model.product;
 import com.shopPhuc.ShoppingOnline.repository.CategoryRepository;
 import com.shopPhuc.ShoppingOnline.repository.ProductRepository;
+import com.shopPhuc.ShoppingOnline.service.ImageStorageService;
+import com.shopPhuc.ShoppingOnline.util.OrderUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +26,9 @@ public class ManegerProduct {
     ProductRepository productRepository;
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    private ImageStorageService imageStorageService;
+
     @GetMapping("/admin/ManagerProduct")
     public String Managerproduct(Model model, @RequestParam("keywords") Optional<String> kw,
                           @RequestParam("p") Optional<Integer> p) {
@@ -48,7 +55,8 @@ public class ManegerProduct {
     }
     @PostMapping("/admin/ManagerProduct/edit")
     public String editProduct(@ModelAttribute("product") product updatedProduct,
-    @RequestParam("categoryid") Long id
+    @RequestParam("categoryid") Long id,
+    @RequestParam("photo") MultipartFile photo
     ) {
         System.out.println("updating product");
 
@@ -64,6 +72,28 @@ public class ManegerProduct {
             originalProduct.setPrice(updatedProduct.getPrice());
             originalProduct.setCategory(categoryRepository.findById(id).isPresent() ? categoryRepository.findById(id).get() : null);
 
+            if(!photo.isEmpty()){
+                String imgnew = OrderUtils.generateImage();
+                if(optionalProduct.get().getImage()!=null){
+                    try {
+
+                        imageStorageService.deleteImage(optionalProduct.get().getImage());
+                        imageStorageService.storeImage(photo,imgnew);
+                        originalProduct.setImage(imgnew+".png");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else{
+                    try {
+                        imageStorageService.storeImage(photo,imgnew);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    originalProduct.setImage(imgnew+".png");
+                }
+            }else{
+                originalProduct.setImage(optionalProduct.get().getImage());
+            }
             // Save the updated product back to the database
             productRepository.save(originalProduct);
 
@@ -81,8 +111,23 @@ public class ManegerProduct {
         return "admin/AddProduct";
     }
     @PostMapping("/admin/ManagerProduct/add")
-    public String addProduct(@ModelAttribute("product") product p,@RequestParam("categoryId") Long id ) {
+    public String addProduct(@ModelAttribute("product") product p,
+                             @RequestParam("categoryId") Long id ,
+                             @RequestParam("photo") MultipartFile photo
+
+    ) {
         p.setCategory(categoryRepository.findById(id).isPresent() ? categoryRepository.findById(id).get() : null);
+
+        if(!photo.isEmpty()){
+            String image= OrderUtils.generateImage();
+            p.setImage(image+".png");
+            try {
+                imageStorageService.storeImage(photo,image);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         productRepository.save(p);
         return "redirect:/admin/ManagerProduct";
     }

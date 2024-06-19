@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body layout:fragment="content">
-<form th:object="${product}" th:action="@{/admin/ManagerProduct/edit}" method="post">
+<form th:object="${product}" th:action="@{/admin/ManagerProduct/edit}" method="post" enctype="multipart/form-data">
   <input type="hidden" th:field="*{id}">
 
   <div class="mb-3">
@@ -15,6 +15,12 @@
   <div class="mb-3">
     <label class="form-label">Price</label>
     <input type="number" class="form-control" th:field="*{price}">
+  </div>
+  <img class="rounded-t-lg mb-2" style="height: 300px" th:if="${product.image != null}" th:src="@{'/uploads/products/' + ${product.image}}" alt="Product Image" />
+  <img class="rounded-t-lg mb-2" style="height: 300px" th:unless="${product.image != null}" src="https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg" alt="Default Image" />
+  <div class="mb-3">
+    <label class="form-label">Images</label>
+    <input type="file" name="photo" class="form-control" multiple>
   </div>
   <div class="mb-3">
     <label class="form-label">Category</label>

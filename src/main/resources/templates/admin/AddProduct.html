@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body layout:fragment="content">
-<form th:object="${product}" method="post" th:action="@{/admin/ManagerProduct/add}">
+<form th:object="${product}" method="post" th:action="@{/admin/ManagerProduct/add}" enctype="multipart/form-data">
 
 
     <div class="mb-3">
@@ -22,7 +22,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Images</label>
-        <input type="text" class="form-control" th:field="*{image}">
+        <input type="file" name="photo" class="form-control" multiple>
     </div>
     <div class="mb-3">
         <label class="form-label">Category</label>

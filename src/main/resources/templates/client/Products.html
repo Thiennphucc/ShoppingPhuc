@@ -27,8 +27,8 @@
              <div class="row r g-3 mx-2">
                  <div class="col-3 mt-2"  th:each="item : ${page.content}">
                      <div class="card">
-                         <img src="\images\w3.png" class="card-img-top " style="height: 270px;object-fit: cover"
-                              alt="Hollywood Sign on The Hill" />
+                         <img class="card-img-top " style="height: 270px;object-fit: cover" th:if="${item.image != null}" th:src="@{'/uploads/products/' + ${item.image}}" alt="Product Image" />
+                         <img class="card-img-top " style="height: 270px;object-fit: cover" th:unless="${item.image != null}" src="https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg" alt="Default Image" />
                          <div class="card-body">
                              <h5 class="card-title" th:text="${item.title}">Card title</h5>
                              <p class="card-text" th:text="${item.description}">
